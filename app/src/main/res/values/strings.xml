@@ -1,0 +1,96 @@
+<resources>
+    <!-- APPLICATION -->
+    <string name="app_name">ThreshVote</string>
+    <string name="dummy_ip">1.2.3.4</string>
+
+    <!-- DEBUGGING -->
+    <!-- yes to wipe data, no to not wipe data -->
+    <string name="debugging">yes</string>
+
+    <!-- FILES -->
+    <string name="file_ip_addresses">threshvote.ip</string>
+    <string name="file_log">threshvote.log</string>
+    <string name="file_blacklist">blacklist.ssid</string>
+
+    <!-- URLS -->
+    <string name="url_vote">http://www.topmudsites.com/vote-thresh.html</string>
+    <!-- <string name="url_ip">http://voting.squug.net/ip/</string> -->
+    <string name="url_ip">http://whatismyip.akamai.com/</string>
+    <string name="url_register">http://voting.squug.net/register/</string>
+    <string name="url_leaderboard">http://voting.squug.net/</string>
+    <string name="url_leaderboards">http://voting.squug.net/leaderboards.php</string>
+    <!-- <string name="ip_url">http://ip2country.sourceforge.net/ip2c.php?format=JSON</string> -->
+    <!-- {ip: "70.30.66.127",hostname: "TOROON0952W-LP130-03-1176388223.dsl.bell.ca",country_code: "CA",country_name: "Canada"} -->
+
+    <!-- IPC MESSAGES ACTIONS -->
+    <string name="action_determine_ip">com.gesslar.threshvote.action.DETERMINE_IP</string>
+    <string name="action_found_ip">com.gesslar.threshvote.action.FOUND_IP</string>
+    <string name="action_found_no_ip">com.gesslar.threshvote.action.FOUND_NO_IP</string>
+    <string name="action_network_status_changed">com.gesslar.threshvote.action.NETWORK_STATUS_CHANGED</string>
+    <string name="action_notify_can_vote">com.gesslar.threshvote.action.NOTIFY_CAN_VOTE</string>
+    <string name="action_notify_character_name_updated">com.gesslar.threshvote.action.NOTIFY_CHARACTER_NAME_UPDATED</string>
+    <string name="action_wipe_temporary_data">com.gesslar.threshvote.action.WIPE_TEMPORARY_DATA</string>
+    <string name="action_update_character_name">com.gesslar.threshvote.action.UPDATE_CHARACTER_NAME</string>
+    <string name="action_set_snack_message">com.gesslar.threshvote.action.SET_SNACK_MESSAGE</string>
+    <string name="action_set_toast_message">com.gesslar.threshvote.action.SET_TOAST_MESSAGE</string>
+    <string name="action_update_time_remaining">com.gesslar.threshvote.action.UPDATE_TIME_REMAINING</string>
+    <string name="action_snooze_reminder">com.gesslar.threshvote.action.SNOOZE_REMINDER</string>
+    <string name="action_vote_event">com.gesslar.threshvote.action.VOTE_EVENT</string>
+    <string name="action_update_ui">action_update_ui</string>
+    <string name="action_mode_updated">mode_updated</string>
+    <string name="action_request_theme_update">request_theme_update</string>
+
+    <!-- PUT/GET EXTRA PARAMs -->
+    <string name="extra_network_status">network_status</string>
+    <string name="extra_ip_address">ip_address</string>
+    <string name="extra_status">status</string>
+    <string name="extra_enable_ui">enable_ui</string>
+    <string name="extra_enable_ui_thinking">enable_thinking</string>
+    <string name="extra_character_name">character_name</string>
+    <string name="extra_main_activity_shown">main_activity_shown</string>
+    <string name="extra_snack_message">snack_message</string>
+    <string name="extra_toast_message">toast_message</string>
+    <string name="extra_time_remaining">time_remaining</string>
+    <string name="extra_update_mode">update_mode</string>
+    <string name="extra_theme">extra_theme</string>
+    <string name="extra_hiding_main_activity">extra_hiding_main_activity</string>
+    <string name="extra_url">url</string>
+
+    <string name="notify_light">notification_light</string>
+    <string name="notify_medium">notification_medium</string>
+    <string name="notify_dark">notification_dark</string>
+
+    <!-- PREFS -->
+    <string name="pref_key_character_name">Character Name</string>
+    <string name="pref_key_ethos">Ethos</string>
+    <string name="pref_key_mode">Mode</string>
+    <string name="pref_key_enable_notification_vibrate">Vibrate Enabled</string>
+    <string name="pref_key_enable_notification_sound">Sound Enabled</string>
+    <string name="pref_key_notification_sound">Notification Sound</string>
+    <string name="pref_key_opportune_mode">Opportune Enabled</string>
+    <string name="pref_ethos_default">neutral</string>
+    <string-array name="pref_values_ethos">
+        <item>good</item>
+        <item>neutral</item>
+        <item>evil</item>
+    </string-array>
+    <string name="pref_sound_option_default">medium</string>
+    <string name="pref_sound_option_light">light</string>
+    <string name="pref_sound_option_medium">medium</string>
+    <string name="pref_sound_option_dark">dark</string>
+    <string name="pref_notification_sound">notification_sound</string>
+    <string-array name="pref_values_sound">
+        <item>light</item>
+        <item>medium</item>
+        <item>dark</item>
+    </string-array>
+    <string name="pref_ethos_option_default">neutral</string>
+    <string name="pref_ethos_option_good">good</string>
+    <string name="pref_ethos_option_neutral">neutral</string>
+    <string name="pref_ethos_option_evil">evil</string>
+
+    <string name="pref_mode_option_default">opportune</string>
+    <string name="pref_mode_option_opportune">opportune</string>
+    <string name="pref_mode_option_normal">normal</string>
+
+</resources>

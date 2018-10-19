@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/title_pref_category_general">
+        <EditTextPreference
+            android:key="@string/pref_key_character_name"
+            android:title="@string/title_pref_label_character_name"
+            android:dialogTitle="@string/title_set_character_name"
+            android:persistent="true"
+            />
+        <ListPreference
+            android:key="@string/pref_key_ethos"
+            android:title="@string/title_pref_label_ethos"
+            android:entries="@array/title_pref_ethos"
+            android:entryValues="@array/pref_values_ethos"
+            android:dialogTitle="@string/title_choose_ethos"
+            android:defaultValue="@string/pref_ethos_default"
+            android:persistent="true"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/title_pref_category_notifications">
+        <SwitchPreference
+            android:title="@string/title_pref_enable_notification_vibrate"
+            android:key="@string/pref_key_enable_notification_vibrate"
+            android:defaultValue="@bool/default_enable_vibrate"
+            />
+        <SwitchPreference
+            android:key="@string/pref_key_enable_notification_sound"
+            android:title="@string/title_pref_label_enable_sound"
+            android:defaultValue="@bool/default_enable_sound"
+            />
+        <ListPreference
+            android:dependency="@string/pref_key_enable_notification_sound"
+            android:key="@string/pref_key_notification_sound"
+            android:title="@string/title_pref_label_notification"
+            android:summary="@string/title_pref_summary_notification"
+            android:entries="@array/title_pref_sound"
+            android:entryValues="@array/pref_values_sound"
+            android:dialogTitle="@string/title_choose_sound"
+            android:defaultValue="@string/pref_sound_option_default"
+            android:persistent="true"
+            />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/title_pref_category_advanced">
+        <SwitchPreference
+            android:key="@string/pref_key_opportune_mode"
+            android:title="@string/title_choose_mode"
+            android:summary="@string/desc_mode"
+            android:defaultValue="@bool/default_opportunistic_mode"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>

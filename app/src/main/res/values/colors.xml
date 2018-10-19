@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DEFAULT COLOURS
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorFaded">#9CA3F2</color>
+    -->
+    <!-- PURPLE COLOURS
+    <color name="colorPrimary">#6a1b9a</color>
+    <color name="colorPrimaryDark">#4a148c</color>
+    <color name="colorAccent">#d500f9</color>
+    <color name="colorFaded">#e1bee7</color>
+    <color name="colorText">#37474f</color>
+    -->
+
+    <color name="colorPrimary">#dd2c00</color>
+    <color name="colorPrimaryDark">#b71c1c</color>
+    <color name="colorAccent">#f44336</color>
+    <color name="colorFaded">#38ff1e25</color>
+    <color name="colorText">#37474f</color>
+    <color name="colorFadedBG">#99dd2c00</color>
+
+</resources>

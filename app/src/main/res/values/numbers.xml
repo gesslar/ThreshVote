@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TWELVE HOURS -->
+    <!-- <integer name="long_twelve_hours">43200000</integer> -->
+    <!-- <integer name="long_twelve_hours">300000</integer> -->
+    <!-- <integer name="long_twelve_hours">30000</integer> -->
+    <!-- <integer name="long_twelve_hours">10000</integer> -->
+
+    <!-- THIRTEEN HOURS -->
+    <integer name="long_thirteen_hours">46800000</integer>
+    <!--<integer name="long_thirteen_hours">3600000</integer>-->
+    <!-- <integer name="long_thirteen_hours">30000</integer> -->
+    <!-- <integer name="long_thirteen_hours">10000</integer> -->
+
+    <!-- SNOOZE - SIX HOUR  -->
+    <integer name="long_snooze">21600000</integer>
+    <!--<integer name="long_snooze">300000</integer>-->
+    <!--<integer name="long_twelve_hours">30000</integer> -->
+    <!--<integer name="long_snooze">5000</integer> -->
+</resources>

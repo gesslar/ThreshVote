@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '27.0.3'
+
+    defaultConfig {
+        applicationId "com.gesslar.threshvote"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 24
+        versionName "0.8.4"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:23.2.0'
+    implementation 'com.android.support:design:23.2.0'
+    //compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
+    //compile 'com.android.support:design:24.0.0-alpha1'
+}

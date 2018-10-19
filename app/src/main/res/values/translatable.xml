@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <!-- BUTTONS -->
+    <string name="title_refresh_network">Refresh</string>
+    <string name="title_wipe_data">Wipe</string>
+    <string name="title_set_character_name">Set Character Name</string>
+    <string name="title_block_ssid">Vote from</string>
+    <string name="title_block_mobile">Mobile Data</string>
+    <string name="title_choose_sound">Notification sounds</string>
+    <string name="title_choose_ethos">Choose ethos</string>
+    <string name="title_help">Help</string>
+    <string name="title_choose_mode">Opportune Mode</string>
+    <string name="title_leaderboard">Leaderboard</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_pref_label_notification">Notification sound</string>
+    <string name="title_pref_enable_notification_sound">Enable notification sounds</string>
+    <string-array name="title_pref_ethos">
+        <item>Good</item>
+        <item>Neutral</item>
+        <item>Evil</item>
+    </string-array>
+    <string name="title_pref_label_enable_sound">Enable sound</string>
+    <string name="title_pref_enable_notification_vibrate">Vibrate</string>
+    <string name="title_pref_summary_notification">Choose notification sounds</string>
+    <string name="title_enable_good_notifications">Good Notification Sounds</string>
+    <string name="title_enable_neutral_notifications">Neutral Notification Sounds</string>
+    <string name="title_enable_evil_notifications">Evil Notification Sounds</string>
+    <string name="title_enable_no_notifications">No Notification Sounds</string>
+    <string-array name="title_pref_sound">
+        <item>Light</item>
+        <item>Medium</item>
+        <item>Dark</item>
+    </string-array>
+    <string name="title_button_ok">OK</string>
+    <string name="title_button_cancel">Cancel</string>
+    <string name="title_enable_sounds">Enable notification sounds</string>
+    <string name="title_enable_normal_mode">Standard</string>
+    <string name="title_enable_opportunistic_mode">Opportune</string>
+    <string name="title_mode_basic">Standard</string>
+    <string name="title_mode_opportunistic">Opportune</string>
+    <string name="title_share">Share Logs</string>
+
+    <!-- PREFERENCES -->
+    <string name="title_pref_category_general">Character</string>
+    <string name="title_pref_category_notifications">Notifications</string>
+    <string name="title_pref_category_advanced">Advanced</string>
+    <string name="title_pref_label_character_name">Name</string>
+    <string name="title_pref_label_ethos">Ethos</string>
+
+    <!-- DESCRIPTIONS -->
+    <string name="desc_mode_reset">
+        "Switching modes here will reset all of your timers."
+        "You will be prompted again for voting. Simply click the VOTE button"
+        "to set another timer."
+    </string>
+    <string name="desc_normal_mode">
+        "Enable a standard 13 hour timer to remind you to vote at each interval."
+        "The timer will be reset each time you press the VOTE button."
+    </string>
+    <string name="desc_opportunistic_mode">
+        "Enable a more advanced mode to prompt a vote every time a specific IP address"
+        "has not voted after 13 hours. Each time your IP address changes (switching"
+        "between WiFi and mobile data), the app will determine if that new IP address"
+        "has voted inside 13 hours. If not, a vote prompt will occur. Warning this is a"
+        "much more frequent vote reminder than Normal Mode."
+    </string>
+    <string name="desc_mode">
+        "If enabled, ThreshVote will attempt to remind you to vote at every"
+        "opportunity. This means that as you move about, getting new IP addresses,"
+        "ThreshVote will determine if those new IPs are eligible to vote."
+        "If disabled, a standard 13 hour voting window will be put into effect."
+    </string>
+    <string name="notificaton_vote_title">Vote for ThresholdRPG</string>
+    <string name="notification_vote_message">Click here to vote for ThresholdRPG.</string>
+    <string name="notification_vote_message_big">Improve your karma by clicking here to vote for ThresholdRPG!</string>
+    <string name="notification_vote_button_title">Vote Now!</string>
+    <string name="notification_snooze_button_title">Snooze</string>
+
+    <!-- NOTIFICATION MESSAGES -->
+    <string-array name="notify_message_good">
+        <item>Vishnu challenges you</item>
+        <item>Erosia beckons to you</item>
+        <item>Vivoria entreats you</item>
+    </string-array>
+    <string-array name="notify_message_neutral">
+        <item>Tempest thunders at you</item>
+        <item>Silvanus roars at you</item>
+        <item>Chronos murmurs to you</item>
+        <item>Mortis whispers to you</item>
+        <item>Loviatar threatens you</item>
+    </string-array>
+    <string-array name="notify_message_evil">
+        <item>Bast entices you</item>
+        <item>Gethsemane cackles at you</item>
+        <item>Set says in a harsh whisper</item>
+    </string-array>
+
+    <!-- TOAST MESSAGES -->
+    <string name="toast_vote_warning_normal">Vote Registered</string>
+    <string name="toast_vote_warning_opportunistic">IP Address Registered</string>
+
+    <!-- STATUS MESSAGES -->
+    <string name="status_vote_now">Click to vote at ThresholdRPG!</string>
+    <string name="status_determining_ip_address">Determining network&#8230;</string>
+    <string name="status_unable_to_determine_ip_address">No internet connection.</string>
+    <string name="status_message_unable_to_determine_ip_address">Unable to determine external network connection. Click Retry.</string>
+    <string name="status_message_no_vote_normal">You cannot vote again for another %1$d hours, %2$d minutes, %3$d seconds.</string>
+    <string name="status_message_no_vote_opportunistic">You cannot vote again from this IP address for another %1$d hours, %2$d minutes, %3$d seconds.</string>
+    <string name="status_can_vote_now">Click VOTE now!</string>
+    <string name="status_countdown_remaining">%1$d:%2$02d:%3$02d</string>
+    <string name="status_blacklisted_ssid">Voting disabled from</string>
+
+    <!-- CHARACTER NAME MESSAGES -->
+    <string name="character_default_name_message">Character name not set.</string>
+</resources>

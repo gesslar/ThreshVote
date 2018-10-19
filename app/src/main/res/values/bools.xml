@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="default_opportunistic_mode">true</bool>
+    <bool name="default_enable_sound">true</bool>
+    <bool name="default_enable_vibrate">true</bool>
+</resources>
