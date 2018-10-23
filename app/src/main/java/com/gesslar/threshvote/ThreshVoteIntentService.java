@@ -69,7 +69,6 @@ public class ThreshVoteIntentService extends IntentService {
     public static Boolean mDeterminingIP = false;
     public static Boolean mCanVote = false;
     public static Boolean mCanShowCountdown = false;
-    public static Boolean mOpportune = true;
     public static Boolean mSoundEnabled = true;
     public static Boolean mInitialized = false;
     public static Boolean mBlackListedSSID = false;
@@ -89,7 +88,6 @@ public class ThreshVoteIntentService extends IntentService {
     private static final String ACTION_SET_CHARACTER_NAME     = "com.gesslar.threshvote.action.SET_CHARACTER_NAME";
     private static final String ACTION_NETWORK_STATUS_CHANGED = "com.gesslar.threshvote.action.NETWORK_STATUS_CHANGED";
     private static final String ACTION_START_UPDATE_COUNTDOWN = "com.gesslar.threshvote.action.START_UPDATE_COUNTDOWN";
-    private static final String ACTION_DETERMINE_OPPORTUNE    = "com.gesslar.threshvote.action.ACTION_DETERMINE_OPPORTUNE";
     private static final String ACTION_DETERMINE_SOUND_ENABLED = "com.gesslar.threshvote.action.ACTION_DETERMINE_SOUND_ENABLED";
     private static final String ACTION_REGISTER_VOTE          = "com.gesslar.threshvote.action.REGISTER_VOTE";
     private static final String ACTION_EMAIL_LOG              = "com.gesslar.threshvote.action.EMAIL_LOG";
@@ -142,12 +140,6 @@ public class ThreshVoteIntentService extends IntentService {
     public static void startActionDetermineSoundEnabled(Context context) {
         Intent intent = new Intent(context, ThreshVoteIntentService.class);
         intent.setAction(ACTION_DETERMINE_SOUND_ENABLED);
-        context.startService(intent);
-    }
-
-    public static void startActionDetermineOpportune(Context context) {
-        Intent intent = new Intent(context, ThreshVoteIntentService.class);
-        intent.setAction(ACTION_DETERMINE_OPPORTUNE);
         context.startService(intent);
     }
 
@@ -263,8 +255,6 @@ public class ThreshVoteIntentService extends IntentService {
                 handleStartUpdateCountDown();
             } else if (ACTION_INIT_DATA.equals(action)) {
                 handleInitData();
-            } else if(ACTION_DETERMINE_OPPORTUNE.equals(action)) {
-                handleActionDetermineOpportune();
             } else if(ACTION_DETERMINE_SOUND_ENABLED.equals(action)) {
                 handleActionDetermineSoundEnabled();
             } else if(ACTION_REGISTER_VOTE.equals(action)) {
@@ -642,12 +632,7 @@ public class ThreshVoteIntentService extends IntentService {
             diff -= min * 60;
             sec = diff;
 
-            String noVoteMess;
-            if (mOpportune) {
-                noVoteMess = String.format(getString(R.string.status_message_no_vote_opportunistic), hr, min, sec);
-            } else {
-                noVoteMess = String.format(getString(R.string.status_message_no_vote_normal), hr, min, sec);
-            }
+            final String noVoteMess = String.format(getString(R.string.status_message_no_vote_normal), hr, min, sec);
 
             Intent intent = new Intent();
             intent.setAction(getResources().getString(R.string.action_set_snack_message));
@@ -657,12 +642,7 @@ public class ThreshVoteIntentService extends IntentService {
             return ;
         }
 
-        String warnMess;
-        if (mOpportune) {
-            warnMess = getResources().getString(R.string.toast_vote_warning_opportunistic);
-        } else {
-            warnMess = getResources().getString(R.string.toast_vote_warning_normal);
-        }
+        final String warnMess = getResources().getString(R.string.toast_vote_warning_normal);
 
         Intent intent = new Intent();
         intent.setAction(getResources().getString(R.string.action_set_toast_message));
@@ -795,9 +775,7 @@ public class ThreshVoteIntentService extends IntentService {
         String ethos =
                 PreferenceManager.getDefaultSharedPreferences(this).getString(getString(R.string.pref_key_ethos), getString(R.string.pref_ethos_default));
 
-        String mode;
-        if(mOpportune) mode = "opportunistic";
-        else mode = "normal";
+        final String mode = "normal";
 
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -910,7 +888,6 @@ public class ThreshVoteIntentService extends IntentService {
         if(mCharacterName.isEmpty()) startActionLoadCharacterName(this);
         startActionDetermineSSID(this);
         startActionDetermineBlackisted(this);
-        startActionDetermineOpportune(this);
         startActionDetermineSoundEnabled(this);
         startActionDetermineCanVote(this);
         if(mIPAddress.isEmpty()) startActionDetermineIP(this);
@@ -995,18 +972,6 @@ public class ThreshVoteIntentService extends IntentService {
             e.printStackTrace();
         }
         disableConnectionReuseIfNecessary();
-    }
-
-    private void handleActionDetermineOpportune() {
-        String key = getResources().getString(R.string.pref_key_opportune_mode);
-        Boolean defaultOpportune = getResources().getBoolean(R.bool.default_opportunistic_mode);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mOpportune = sharedPreferences.getBoolean(key, defaultOpportune);
-
-        Intent updateUI = new Intent();
-        updateUI.setAction(getString(R.string.action_update_ui));
-        sendBroadcast(updateUI);
-
     }
 
     private void handleActionDetermineSoundEnabled() {

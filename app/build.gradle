@@ -8,8 +8,8 @@ android {
         applicationId "com.gesslar.threshvote"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 50
-        versionName "1.0.0"
+        versionCode 51
+        versionName "1.1.0"
     }
     buildTypes {
         release {

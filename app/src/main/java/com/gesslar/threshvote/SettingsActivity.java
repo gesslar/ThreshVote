@@ -94,7 +94,6 @@ public class SettingsActivity extends Activity {
                         .setAudioAttributes(audioAttributes)
                         .build();
 
-
                 sndLight = soundPool.load(getActivity(), R.raw.notification_light, 1);
                 sndMedium = soundPool.load(getActivity(), R.raw.notification_medium, 1);
                 sndDark = soundPool.load(getActivity(), R.raw.notification_dark, 1);
@@ -155,8 +154,6 @@ public class SettingsActivity extends Activity {
                 mPrefSound.setSummary(sound);
             } else if(key.equals(getString(R.string.pref_key_enable_notification_sound))) {
                 ThreshVoteIntentService.startActionDetermineSoundEnabled(getActivity());
-            } else if(key.equals(getString(R.string.pref_key_opportune_mode))) {
-                ThreshVoteIntentService.startActionDetermineOpportune(getActivity());
             }
         }
 
