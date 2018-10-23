@@ -24,40 +24,45 @@
           android:visible="true" />
 
     <item android:id="@+id/menu_settings"
-          android:orderInCategory="100"
-          android:title="@string/title_settings"
-          android:icon="@drawable/ic_menu_action_settings"
-          app:showAsAction="always" />
-<!--
-
-        <item android:id="@+id/menu_refresh_network"
-              android:orderInCategory="100"
-              android:icon="@drawable/ic_menu_action_refresh_network"
-              android:title="@string/title_refresh_network"
-              android:enabled="true"
-              app:showAsAction="always" />
-
-    <item android:id="@+id/menu_choose_sound"
         android:orderInCategory="100"
-        android:title="@string/title_choose_sound"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_menu_action_choose_sound"
-        android:visible="true"/>
+        android:title="@string/title_settings"
+        android:icon="@drawable/ic_menu_action_settings"
+        app:showAsAction="always" />
 
-    <item android:id="@+id/menu_choose_mode"
-          android:orderInCategory="100"
-          android:title="@string/title_choose_mode"
-          android:icon="@drawable/ic_menu_action_choose_mode"
-          app:showAsAction="ifRoom"
-          android:visible="true"/>
+    <item android:id="@+id/menu_about"
+        android:orderInCategory="100"
+        android:title="@string/title_about"
+        app:showAsAction="never" />
+    <!--
 
-    <item android:id="@+id/menu_wipe_data"
-          android:orderInCategory="100"
-          android:icon="@drawable/ic_menu_action_wipe_data"
-          android:title="@string/title_wipe_data"
-          app:showAsAction="ifRoom"
-          android:visible="false"/>
--->
+            <item android:id="@+id/menu_refresh_network"
+                  android:orderInCategory="100"
+                  android:icon="@drawable/ic_menu_action_refresh_network"
+                  android:title="@string/title_refresh_network"
+                  android:enabled="true"
+                  app:showAsAction="always" />
+
+        <item android:id="@+id/menu_choose_sound"
+            android:orderInCategory="100"
+            android:title="@string/title_choose_sound"
+            app:showAsAction="ifRoom"
+            android:icon="@drawable/ic_menu_action_choose_sound"
+            android:visible="true"/>
+
+        <item android:id="@+id/menu_choose_mode"
+              android:orderInCategory="100"
+              android:title="@string/title_choose_mode"
+              android:icon="@drawable/ic_menu_action_choose_mode"
+              app:showAsAction="ifRoom"
+              android:visible="true"/>
+
+        <item android:id="@+id/menu_wipe_data"
+              android:orderInCategory="100"
+              android:icon="@drawable/ic_menu_action_wipe_data"
+              android:title="@string/title_wipe_data"
+              app:showAsAction="ifRoom"
+              android:visible="false"/>
+    -->
     <!--
         <item android:id="@+id/menu_share"
               android:orderInCategory="100"

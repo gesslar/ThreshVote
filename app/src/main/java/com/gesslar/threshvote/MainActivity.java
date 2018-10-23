@@ -37,21 +37,20 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private BroadcastReceiver mIPReceiver;
-    private BroadcastReceiver mNoIPReceiver;
-    private BroadcastReceiver mSetSnackMessageReceiver;
-    private BroadcastReceiver mSetToastMessageReceiver;
-    private BroadcastReceiver mTimerUpdateReceiver;
-    private BroadcastReceiver mUpdateUIReceiver;
+    private BroadcastReceiver receiverIp;
+    private BroadcastReceiver receiverNoIp;
+    private BroadcastReceiver receiverSetSnackMessage;
+    private BroadcastReceiver receiverSetToastMessage;
+    private BroadcastReceiver receiverTimerUpdate;
+    private BroadcastReceiver receiverUpdateUi;
 
     final private Boolean UI_ENABLE = true;
     final private Boolean UI_DISABLE = false;
     final private Boolean UI_THINKING = true;
     final private Boolean UI_NOT_THINKING = false;
 
-    private MenuItem menuCharacterName, menuSettings, menuLeaderBoard, menuSSID;
-    private TextSwitcher mCountDown;
-    private ImageButton mVoteButton;
+    private MenuItem miCharacterName, miSettings, miLeaderBoard, miSsid;
+    private ImageButton ibVoteButton;
 
 // ** @@EVENTS *************************************************************************************
 
@@ -63,14 +62,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mCountDown = (TextSwitcher) findViewById(R.id.textCountdown);
-        mCountDown.setFactory(mFactory);
-
         Animation in = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         Animation out = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
-
-        mCountDown.setInAnimation(in);
-        mCountDown.setOutAnimation(out);
 
         if(!ThreshVoteIntentService.mInitialized) initializeData();
     }
@@ -92,27 +85,27 @@ public class MainActivity extends AppCompatActivity {
 
         // SET UP ALL THE INTENT FILTERS FOR THE MAINACTIVITY TO RESPOND TO
         IntentFilter filterIPReceived = new IntentFilter(resources.getString(R.string.action_found_ip));
-        mIPReceiver = new BroadcastReceiver() {
+        receiverIp = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 updateUI();
             }
         };
 
-        this.registerReceiver(mIPReceiver, filterIPReceived);
+        this.registerReceiver(receiverIp, filterIPReceived);
 
         IntentFilter filterNoIPReceived = new IntentFilter(resources.getString(R.string.action_found_no_ip));
-        mNoIPReceiver = new BroadcastReceiver() {
+        receiverNoIp = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 promptForConnection();
             }
         };
 
-        this.registerReceiver(mNoIPReceiver, filterNoIPReceived);
+        this.registerReceiver(receiverNoIp, filterNoIPReceived);
 
         IntentFilter filterSetSnackMessage = new IntentFilter(resources.getString(R.string.action_set_snack_message));
-        mSetSnackMessageReceiver = new BroadcastReceiver() {
+        receiverSetSnackMessage = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 final String mess = intent.getStringExtra(resources.getString(R.string.extra_snack_message));
@@ -124,10 +117,10 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        this.registerReceiver(mSetSnackMessageReceiver, filterSetSnackMessage);
+        this.registerReceiver(receiverSetSnackMessage, filterSetSnackMessage);
 
         IntentFilter filterSetToastMessage = new IntentFilter(resources.getString(R.string.action_set_toast_message));
-        mSetToastMessageReceiver = new BroadcastReceiver() {
+        receiverSetToastMessage = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 final String mess = intent.getStringExtra(resources.getString(R.string.extra_toast_message));
@@ -135,31 +128,32 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        this.registerReceiver(mSetToastMessageReceiver, filterSetToastMessage);
+        this.registerReceiver(receiverSetToastMessage, filterSetToastMessage);
 
         IntentFilter filterTimerUpdate = new IntentFilter(resources.getString(R.string.action_update_time_remaining));
-        mTimerUpdateReceiver = new BroadcastReceiver() {
+        receiverTimerUpdate = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 final String mess = intent.getStringExtra(resources.getString(R.string.extra_time_remaining));
-                mCountDown.setText(mess);
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                toolbar.setSubtitle(mess);
             }
         };
 
-        this.registerReceiver(mTimerUpdateReceiver, filterTimerUpdate);
+        this.registerReceiver(receiverTimerUpdate, filterTimerUpdate);
 
         IntentFilter filterUpdateUI = new IntentFilter(resources.getString(R.string.action_update_ui));
-        mUpdateUIReceiver = new BroadcastReceiver() {
+        receiverUpdateUi = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             updateUI();
         }
         };
 
-        this.registerReceiver(mUpdateUIReceiver, filterUpdateUI);
+        this.registerReceiver(receiverUpdateUi, filterUpdateUI);
 
-        mVoteButton = (ImageButton) findViewById(R.id.buttonVote);
-        mVoteButton.setOnLongClickListener(new View.OnLongClickListener() {
+        ibVoteButton = (ImageButton) findViewById(R.id.buttonVote);
+        ibVoteButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -204,12 +198,12 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         // UNREGISTER ALL THE INTENT RECEIVERS FOR THE INTENT FILTERS
-        this.unregisterReceiver(this.mIPReceiver);
-        this.unregisterReceiver(this.mNoIPReceiver);
-        this.unregisterReceiver(this.mSetSnackMessageReceiver);
-        this.unregisterReceiver(this.mSetToastMessageReceiver);
-        this.unregisterReceiver(this.mTimerUpdateReceiver);
-        this.unregisterReceiver(this.mUpdateUIReceiver);
+        this.unregisterReceiver(this.receiverIp);
+        this.unregisterReceiver(this.receiverNoIp);
+        this.unregisterReceiver(this.receiverSetSnackMessage);
+        this.unregisterReceiver(this.receiverSetToastMessage);
+        this.unregisterReceiver(this.receiverTimerUpdate);
+        this.unregisterReceiver(this.receiverUpdateUi);
 
         // ALERT EVERYTHING THAT THE MAINACTIVITY IS HIDDEN
         ThreshVoteIntentService.mActive--;
@@ -227,10 +221,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        menuSettings = menu.findItem(R.id.menu_settings);
-        menuCharacterName = menu.findItem(R.id.menu_set_character_name);
-        menuLeaderBoard = menu.findItem(R.id.menu_show_leaderboard);
-        menuSSID = menu.findItem(R.id.menu_block_ssid);
+        miSettings = menu.findItem(R.id.menu_settings);
+        miCharacterName = menu.findItem(R.id.menu_set_character_name);
+        miLeaderBoard = menu.findItem(R.id.menu_show_leaderboard);
+        miSsid = menu.findItem(R.id.menu_block_ssid);
 
         updateUI();
 
@@ -243,16 +237,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.menu_show_leaderboard) {
-            /*
-            JSONParser j = new JSONParser();
-            j.getJSONFromUrl(getString(R.string.url_leaderboards));
-            */
-            /*
-            ThreshVoteIntentService.startActionFetchJSON(this, getString(R.string.url_leaderboards));
-
-            Intent intent = new Intent(MainActivity.this, LeaderBoardActivity.class);
-            startActivity(intent);
-            */
             ThreshVoteIntentService.startActionShowLeaderboard(this);
         }
 
@@ -300,6 +284,32 @@ public class MainActivity extends AppCompatActivity {
             updateUI();
         }
 
+        if(id == R.id.menu_about) {
+            PackageInfo packageInfo = null;
+            try {
+                packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            StringBuilder msg = new StringBuilder();
+
+            msg.append("ThreshVote v.").append(packageInfo.versionName).append(" (").append(packageInfo.versionCode).append(")\n");
+            msg.append("By Brian M. Workman (gesslar)").append("\n");
+            msg.append("karahd@gmail.com");
+
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("About ThreshVote");
+            alertDialog.setMessage(msg);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -327,11 +337,8 @@ public class MainActivity extends AppCompatActivity {
         btnVote.setImageDrawable(icon);
         /*
         loadingBar.setVisibility(thinking ? View.VISIBLE : View.GONE);
-        mCountDown.setVisibility(enabled ? View.VISIBLE : View.GONE);
         */
         loadingBar.setVisibility(thinking ? View.VISIBLE : View.INVISIBLE);
-        //mCountDown.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-
     }
 
     // If we were unable to determine an IP address, for whatever reason,
@@ -383,13 +390,12 @@ public class MainActivity extends AppCompatActivity {
         // OBJECTS ON THIS UI
         ImageButton buttonVote = (ImageButton) findViewById(R.id.buttonVote);
         TextView textStatusMessage = (TextView) findViewById(R.id.textStatusMessage);
-        TextSwitcher textCountDown = (TextSwitcher) findViewById(R.id.textCountdown);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         Menu theMenu = toolbar.getMenu();
-        menuCharacterName = theMenu.findItem(R.id.menu_set_character_name);
-        menuSettings = theMenu.findItem(R.id.menu_settings);
-        menuLeaderBoard = theMenu.findItem(R.id.menu_show_leaderboard);
-        menuSSID = theMenu.findItem(R.id.menu_block_ssid);
+        miCharacterName = theMenu.findItem(R.id.menu_set_character_name);
+        miSettings = theMenu.findItem(R.id.menu_settings);
+        miLeaderBoard = theMenu.findItem(R.id.menu_show_leaderboard);
+        miSsid = theMenu.findItem(R.id.menu_block_ssid);
 
         // INFORMATION WE WILL NEED/STATUS
         Boolean disconnected = NetworkUtil.getConnectivityStatus(this) == NetworkUtil.TYPE_NOT_CONNECTED;
@@ -397,129 +403,58 @@ public class MainActivity extends AppCompatActivity {
         String ipAddress = ThreshVoteIntentService.mIPAddress;
         String characterName = ThreshVoteIntentService.mCharacterName;
         String connection = NetworkUtil.getConnectionType(this);
-        Boolean opportunistic = ThreshVoteIntentService.mOpportune;
         Boolean blacklisted = ThreshVoteIntentService.mBlackListedSSID;
         String ssid = ThreshVoteIntentService.mSSID;
         Boolean canVote = VoteUtil.canVoteFromIP(this, ipAddress);
 
         Log.d("updateUI", "BLACKLISTED: " + blacklisted.toString());
-
-        String subTitle = (opportunistic ? getString(R.string.title_mode_opportunistic) : getString(R.string.title_mode_basic)) +
-                " (" + connection + ")";
-
         // SET BASE INFORMATION ON UI ELEMENTS
 
         textStatusMessage.setText("");
-        textCountDown.setText("");
 
-        if(menuSSID != null) {
+        if(miSsid != null) {
             if(ssid == null) {
-                menuSSID.setVisible(false);
+                miSsid.setVisible(false);
             } else {
-                menuSSID.setVisible(true);
+                miSsid.setVisible(true);
                 String mess = getString(R.string.title_block_ssid) + " " + ssid;
-                menuSSID.setTitle(mess);
-                menuSSID.setChecked(!blacklisted);
+                miSsid.setTitle(mess);
+                miSsid.setChecked(!blacklisted);
             }
         }
 
-        if(opportunistic)
-        {
-            // ARE WE DOING SOMETHING?
-            if(determiningIP) {
-                enableUI(UI_DISABLE, UI_THINKING);
-                textStatusMessage.setVisibility(View.VISIBLE);
-                textStatusMessage.setText(getResources().getString(R.string.status_determining_ip_address));
-                if(!characterName.isEmpty()) {
-                    toolbar.setSubtitle(subTitle);
-                }
-            } else {
-                if (characterName.isEmpty()) {
-                    enableUI(UI_DISABLE, UI_NOT_THINKING);
-                    textStatusMessage.setVisibility(View.VISIBLE);
-                    textStatusMessage.setText(getResources().getString(R.string.character_default_name_message));
-                    if(menuSettings != null) menuSettings.setVisible(false);
-                    if(menuCharacterName != null) menuCharacterName.setVisible(true);
-                    if(menuLeaderBoard != null) menuLeaderBoard.setVisible(false);
-                } else {
-                    if(menuSettings != null) menuSettings.setVisible(true);
-                    if(menuCharacterName != null) menuCharacterName.setVisible(false);
-                    if(menuLeaderBoard != null) menuLeaderBoard.setVisible(true);
-                    toolbar.setTitle(characterName);
-                    if(disconnected) {
-                        enableUI(UI_DISABLE, UI_NOT_THINKING);
-                        toolbar.setSubtitle(subTitle);
-                        textStatusMessage.setVisibility(View.VISIBLE);
-                        textStatusMessage.setText(getResources().getString(R.string.status_unable_to_determine_ip_address));
-                    } else {
-                        if(ipAddress.isEmpty()) {
-                            toolbar.setSubtitle(subTitle);
-                            enableUI(UI_DISABLE, UI_NOT_THINKING);
-                            textStatusMessage.setVisibility(View.VISIBLE);
-                            textStatusMessage.setText(getResources().getString(R.string.status_unable_to_determine_ip_address));
-                        } else {
-                            if(blacklisted) {
-                                toolbar.setSubtitle(subTitle);
-                                enableUI(UI_DISABLE, UI_NOT_THINKING);
-                                String status = getResources().getString(R.string.status_blacklisted_ssid) + "\n" + ssid;
-                                textStatusMessage.setText(status);
-                            } else {
-                                if (canVote) {
-                                    toolbar.setSubtitle(subTitle);
-                                    enableUI(UI_ENABLE, UI_NOT_THINKING);
-                                    textCountDown.setVisibility(View.VISIBLE);
-                                } else {
-                                    enableUI(UI_DISABLE, UI_NOT_THINKING);
-                                }
-                            }
-                        }
-                    }
-                }
+        // ARE WE DOING SOMETHING?
+        if(determiningIP) {
+            if(!characterName.isEmpty()) {
+                toolbar.setTitle(characterName);
             }
-        }
-        else {
-            // ARE WE DOING SOMETHING?
-            if(determiningIP) {
-                if(!characterName.isEmpty()) {
-                    toolbar.setTitle(characterName);
-                    toolbar.setSubtitle(subTitle);
-                }
+        } else {
+            if (characterName.isEmpty()) {
+                if(miSettings != null) miSettings.setVisible(false);
+                if(miCharacterName != null) miCharacterName.setVisible(true);
+                if(miLeaderBoard != null) miLeaderBoard.setVisible(false);
+                enableUI(UI_DISABLE, UI_NOT_THINKING);
+                textStatusMessage.setVisibility(View.VISIBLE);
+                textStatusMessage.setText(getResources().getString(R.string.character_default_name_message));
             } else {
-                if (characterName.isEmpty()) {
-                    toolbar.setSubtitle(subTitle);
-                    if(menuSettings != null) menuSettings.setVisible(false);
-                    if(menuCharacterName != null) menuCharacterName.setVisible(true);
-                    if(menuLeaderBoard != null) menuLeaderBoard.setVisible(false);
+                if(miSettings != null) miSettings.setVisible(true);
+                if(miCharacterName != null) miCharacterName.setVisible(false);
+                if(miLeaderBoard != null) miLeaderBoard.setVisible(true);
+                toolbar.setTitle(characterName);
+                if(disconnected || ipAddress.isEmpty()) {
                     enableUI(UI_DISABLE, UI_NOT_THINKING);
                     textStatusMessage.setVisibility(View.VISIBLE);
-                    textStatusMessage.setText(getResources().getString(R.string.character_default_name_message));
+                    textStatusMessage.setText(getResources().getString(R.string.status_unable_to_determine_ip_address));
                 } else {
-                    if(menuSettings != null) menuSettings.setVisible(true);
-                    if(menuCharacterName != null) menuCharacterName.setVisible(false);
-                    if(menuLeaderBoard != null) menuLeaderBoard.setVisible(true);
-                    toolbar.setTitle(characterName);
-                    toolbar.setSubtitle(subTitle);
-                    if(disconnected || ipAddress.isEmpty()) {
-                        toolbar.setSubtitle(subTitle);
+                    if(blacklisted) {
                         enableUI(UI_DISABLE, UI_NOT_THINKING);
-                        textStatusMessage.setVisibility(View.VISIBLE);
-                        textStatusMessage.setText(getResources().getString(R.string.status_unable_to_determine_ip_address));
+                        String status = getResources().getString(R.string.status_blacklisted_ssid) + "\n" + ssid;
+                        textStatusMessage.setText(status);
                     } else {
-                        if(blacklisted) {
-                            toolbar.setSubtitle(subTitle);
-                            enableUI(UI_DISABLE, UI_NOT_THINKING);
-                            String status = getResources().getString(R.string.status_blacklisted_ssid) + "\n" + ssid;
-                            textStatusMessage.setText(status);
+                        if (canVote) {
+                            enableUI(UI_ENABLE, UI_NOT_THINKING);
                         } else {
-                            if (canVote) {
-                                toolbar.setSubtitle(subTitle);
-                                enableUI(UI_ENABLE, UI_NOT_THINKING);
-                                textCountDown.setVisibility(View.VISIBLE);
-                            } else {
-                                toolbar.setSubtitle(subTitle);
-                                enableUI(UI_DISABLE, UI_NOT_THINKING);
-                                textCountDown.setVisibility(View.VISIBLE);
-                            }
+                            enableUI(UI_DISABLE, UI_NOT_THINKING);
                         }
                     }
                 }
